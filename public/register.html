@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap">
+    <style>
+        :root {
+            --bg-color: #080808;
+            --text-color: white;
+            --main-color: #49d9ff;
+            --error-color: #ff4949;
+            --success-color: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: var(--bg-color) !important;
+            color: var(--text-color) !important;
+            line-height: 1.6 !important;
+            height: 100vh;
+        }
+
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding-top: 80px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            border-radius: 15px;
+            background-color: #131313;
+        }
+
+        .register-card h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--main-color);
+        }
+
+        .form-control.error {
+            border-color: var(--error-color);
+        }
+
+        .form-control.success {
+            border-color: var(--success-color);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--main-color) !important;
+            color: black;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary:hover {
+            background-color: black !important;
+            color: var(--main-color) !important;
+            border: 2px solid var(--main-color);
+            transform: translateY(-3px);
+        }
+
+        .text-light-gray {
+            color: #b0bec5;
+            text-align: center;
+        }
+
+        .text-light-gray a {
+            color: #b0bec5;
+            transition: color 0.3s ease;
+        }
+
+        .text-light-gray a:hover {
+            color: var(--main-color);
+        }
+        .form-control.error, .form-select.error {
+        border: 2px solid var(--error-color); 
+    }
+
+    
+    .form-control.error:focus, .form-select.error:focus {
+        box-shadow: 0 0 5px var(--error-color);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="register-container">
+        <div class="register-card">
+            <h3>Register</h3>
+            <form action="/register" method="POST" onsubmit="return validateForm()">
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Full name</label>
+                    <input type="text" class="form-control error" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control error" id="dob" name="dob" required>
+                </div>
+                <div class="mb-3">
+                    <label for="sex" class="form-label">Sex</label>
+                    <select class="form-select error" id="sex" name="sex" required>
+                        <option value="">Select your sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="tel" class="form-control error" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control error" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control error" id="username" name="username" placeholder="Choose a username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control error" id="password" name="password" placeholder="Enter a password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="confirm-password" class="form-label">Re-type Password</label>
+                    <input type="password" class="form-control error" id="confirm-password" name="confirm-password" placeholder="Re-type your password" required>
+                </div>
+                
+                    <button type="submit" class="btn btn-primary">Register</button>
+                
+                
+            </form>
+
+            <p class="text-light-gray mt-3">
+                Already have an account? <a href="/login" class="text-light-gray">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const formControls = document.querySelectorAll('.form-control, .form-select');
+
+        formControls.forEach(input => {
+            input.addEventListener('input', validateInput);
+        });
+
+        function validateInput(e) {
+            if (e.target.value.trim() === '') {
+                setError(e.target);
+            } else if (e.target.id === 'confirm-password') {
+                checkPasswordMatch();
+            } else {
+                setSuccess(e.target);
+            }
+        }
+
+        function checkPasswordMatch() {
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirm-password');
+            if (password.value !== confirmPassword.value || confirmPassword.value === '') {
+                setError(confirmPassword);
+            } else {
+                setSuccess(confirmPassword);
+            }
+        }
+
+        function setError(element) {
+            element.classList.remove('success');
+            element.classList.add('error');
+        }
+
+        function setSuccess(element) {
+            element.classList.remove('error');
+            element.classList.add('success');
+        }
+
+        function validateForm() {
+            let isValid = true;
+            formControls.forEach(input => {
+                if (input.classList.contains('error') || input.value.trim() === '') {
+                    setError(input);
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+    </script>
+</body>
+
+</html>

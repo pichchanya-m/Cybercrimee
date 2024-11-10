@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap">
+    <title>Login Error</title>
+    <style>
+        :root {
+            --bg-color: #080808; 
+            --text-color: white; 
+            --main-color: #49d9ff; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: var(--bg-color) !important;
+            color: var(--text-color) !important;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #D22B2B;
+            margin-bottom: 1.5rem;
+        }
+
+        #error-message {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: #b0bec5;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+        }
+
+        a {
+            color: var(--main-color);
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--main-color);
+            transform: scale(1.1);  
+            transition: transform 0.3s ease, color 0.3s ease;  
+        }
+    </style>
+</head>
+<body>
+    <h1>! Incorrect Username or Password !</h1>
+    <p>Please check your credentials and try again🙏</p>
+    <a href="/login">Back to Login</a>
+</body>
+</html>

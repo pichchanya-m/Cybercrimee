@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap">
+    <title>Change Password</title>
+    <style>
+        :root {
+            --bg-color: #080808;
+            --text-color: white;
+            --main-color: #49d9ff;
+            --error-color: #ff4d4d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: var(--bg-color) !important;
+            color: var(--text-color) !important;
+            line-height: 1.6 !important;
+            height: 100vh;
+        }
+
+        .password-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .password-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            background-color: #131313;
+        }
+
+        .password-card h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--main-color);
+            font-size: 2rem;
+        }
+
+        .password-card label {
+            color: #b0bec5;
+            font-size: 1rem;
+        }
+
+        .password-card input {
+            padding: 10px;
+            background-color: #222;
+            color: var(--text-color);
+            border-radius: 8px;
+            border: 2px solid #444;
+            font-size: 1rem;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--main-color) !important;
+            border: 2px solid transparent;
+            color: black;
+            font-size: 1.1rem;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: black !important;
+            color: var(--main-color) !important;
+            border: 2px solid var(--main-color);
+            transform: translateY(-3px);
+        }
+
+   
+
+        .password-card a {
+            color: gray;
+            text-decoration: underline;
+            margin-top: 12px;
+            display: inline-block;
+
+
+        }
+
+        .text-light-gray {
+            color: #b0bec5; 
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .text-light-gray:hover {
+            color: white; 
+           
+        }
+    </style>
+    <script>
+        function validatePasswords(event) {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (newPassword !== confirmPassword) {
+                errorMessage.style.display = 'block';
+                errorMessage.innerText = 'Passwords do not match. Please try again !';
+                event.preventDefault();
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="password-container">
+        <div class="password-card">
+            <h1>Change Your Own Password</h1>
+            <form action="/change-password" method="POST" onsubmit="validatePasswords(event)">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+
+                <label for="confirmPassword">Confirm New Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+
+                <div id="error-message" class="error-message">Passwords do not match. Please try again.</div>
+
+                <button type="submit" class="btn-primary">Change Password</button>
+
+                <p class="text-light-gray mt-5">
+                    <a href="/forgot-password" class="text-light-gray">Back to Send Passwords via Email</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
